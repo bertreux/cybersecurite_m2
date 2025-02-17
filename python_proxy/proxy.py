@@ -91,7 +91,6 @@ def server_loop(local_host, local_port,
     try:
         server.bind((local_host, local_port))
     except Exception as e:
-        #TODO: capture exception
         print('problem on bind: %r' % e)
         print("[!!] Failed to listen on %s:%d" % (local_host, local_port))
         print("[!!] Check for other listening sockets or correct permissions.")
