@@ -244,25 +244,26 @@ def request_handler(buffer):
     # Decode the buffer to a string for manipulation
     try:
         buffer_str = buffer.decode('utf-8', errors='ignore')
-    except UnicodeDecodeError:
+    except UnicodeDecodeError as e:
+        print(f"[Error] Failed to decode buffer: {e}")
         return buffer  # Return unchanged if decoding fails
 
     # Log the FTP command
     print(f"[Request] {buffer_str.strip()}")
 
-    # Example 1: Block certain commands (e.g., DELE to prevent file deletion)
+    # Example: Block certain commands (e.g., DELE to prevent file deletion)
     if buffer_str.strip().upper().startswith('DELE '):
         # Replace 'DELE' with 'NOOP' to prevent deletion
         buffer_str = 'NOOP\r\n'
         print("[Modified Request] Blocked DELE command")
 
-    # Example 2: Modify a command parameter (e.g., change directory path)
+    # Example: Modify a command parameter (e.g., change directory path)
     if buffer_str.strip().upper().startswith('CWD '):
         # Change the directory to '/home/user'
         buffer_str = 'CWD /home/user\r\n'
         print("[Modified Request] Changed directory to '/home/user'")
 
-    # Example 3: Inject a custom command (e.g., send a NOOP before the actual command)
+    # Example: Inject a custom command (e.g., send a NOOP before the actual command)
     buffer_str = 'NOOP\r\n' + buffer_str
     print("[Modified Request] Injected NOOP command before the actual command")
 
