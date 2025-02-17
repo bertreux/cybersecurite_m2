@@ -1,3 +1,5 @@
+# docker run -d -p 21:21 -p 21000-21010:21000-21010 -e FTP_USER=user -e FTP_PASS=pass fauria/vsftpd
+
 import sys
 import socket
 import threading
