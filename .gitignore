@@ -1,2 +1,6 @@
 .idea
 venv
+http_python/cert.pem
+http_python/private.key
+python_tooling/scan_results.json
+python_sniffing/sniffer.log
